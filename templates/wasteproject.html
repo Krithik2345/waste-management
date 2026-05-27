@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial value=1.0">
+    <title>Smart  Waste Management</title>
+    <style>
+        body{
+            font-family:Arial;
+            background-color:#d20e0e;
+
+        }
+        .container{
+            width:80%;
+            margin:auto;
+            color:white;
+            padding:20px;
+            margin-top:30px;
+            border-radius:10px;
+        }
+        table, th,td{
+            border:1px solid black;
+            padding:10px;
+        }
+        button{
+            background-color:green;
+            color:white;
+            padding:10px 20px;
+            border:none;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> waste management</h1>
+        <p>
+            Real time monitoring system
+        </p>
+        <form action="/get_waste" method="POST">
+            <label>City</label>
+            <select name="city">
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="kerala">kerala</option>
+            </select>
+            <br><br>
+            <button type="submit">Submit</button>
+        </form>
+        {% if waste_data %}
+        <h2>Waste Data for {{ selected_city }}</h2>
+        <table>
+            <tr>
+                <td>Waste Type</td>
+                <td>Weight (kg)</td>
+            </tr>
+        {% for row in waste_data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        {% endif %}
+        {% if priority_waste %}
+        <h2>greedy algorithm</h2>
+        <p>
+            Highest waste collected:
+            <b>{{ priority_waste[0] }}</b>
+        </p>
+        <p>
+            Weight:
+            <b>{{ priority_waste[1] }}</b>
+        </p>
+        {% endif %}
+         {% if most_frequent %}
+
+    <h2>Most Frequent Waste Type</h2>
+
+    <p>
+
+        <b>{{ most_frequent }}</b>
+
+    </p>
+
+    {% endif %}
+
+
+    <!-- DYNAMIC PROGRAMMING OUTPUT -->
+
+    {% if total_waste %}
+
+    <h2>Dynamic Programming Result</h2>
+
+    <p>
+
+        Total Waste Collected in
+
+        <b>{{ selected_city }}</b>
+
+        is
+
+        <b>{{ total_waste }}</b>
+
+    </p>
+
+    {% endif %}
+
+    </div>
+</body>
+</html>
